@@ -46,18 +46,20 @@
             <!-- Clock Tab (default) -->
             <div id="clock">
 				<br />
-				<p style="text-align:center; font-size:36px">
-					<span id="clock-date"></span>
-				</p>
-				<p style="text-align:center; font-size:72px">
-					<span id="clock-time"></span>
+				<p style="text-align:center; ">
+					<span style="font-size:36px" id="clock-date"></span> </br />
+					<span style="font-size:72px;" id="clock-time"></span>
 				</p>
                 
             </div>
 
             <!-- Timer Tab -->
             <div id="timer">
-                
+                <br />
+				<p style="text-align:center; font-size:36px">
+					<span id="timer-date"></span>
+					<span id="timer-time"></span>
+				</p>
 				
 				
             </div>
@@ -82,23 +84,24 @@
 		//document.getElementById("clock-time").innerHTML = dt.toLocaleTimeString();
 		
 		function startTime() {
+		  var element = 'clock-time';
 		  var today = new Date();
 		  var h = today.getHours();
 		  var m = today.getMinutes();
 		  var s = today.getSeconds();
 		  m = checkTime(m);
 		  s = checkTime(s);
-		  document.getElementById('clock-time').innerHTML =
+		  document.getElementById(element).innerHTML =
 		  h + ":" + m + ":" + s;
 		  var t = setTimeout(startTime, 500);
 		  
-		  startDate();
+		  startDate('clock-date');
 		}
 		
-		function startDate() {
+		function startDate(element) {
 			var today = new Date();
 			var dd = today.toLocaleDateString();
-			document.getElementById('clock-date').innerHTML =
+			document.getElementById(element).innerHTML =
 			dd;
 		}
 		
