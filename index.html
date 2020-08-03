@@ -85,13 +85,11 @@
 				</p>
                 
                 <p style="text-align:center; font-size:72px;">
-                    <span style="font-size:72px" id="timer-hour"></span> h
-                    <span style="font-size:72px" id="timer-minute"></span> m
-                    <span style="font-size:72px" id="timer-second"></span> s </br />
+                    <span style="font-size:72px" id="timer-countdown">Not configured.</span> </br />
                 </p>
                 <div style="text-align:center">
-                <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="startTimer()"> Start </a>
-                <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="resetTimer()"> Reset </a>
+                <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButton"> Start </a>
+                <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()"> Reset </a>
                 </div>
 				
 				
@@ -120,7 +118,7 @@
 					<textarea  type="text" name="details" id="details"/> </textarea>
 				</div>
 					
-					<button type="button" onclick="setTime()"> Go </button>
+					<button type="button" onclick="setTimer()"> Go </button>
 				</form>
 				
                 
@@ -138,47 +136,84 @@
 
 	<script>
         // Set the date we're counting down to
-        var countDownDate;
         var timeRemaining;
+        var pause = false;
         
-        function setTime(){
+        function setTimer(){
             var today = new Date().getTime();
             var hh = document.getElementById("hours").value;
             var mm = document.getElementById("minutes").value;
             var ss = document.getElementById("seconds").value;
             timeRemaining = (hh*3600000) + (mm*60000) + (ss*1000);
-            countDownDate = new Date(today + timeRemaining);
+            displayInterval();
         }
 
         // Update the count down every 1 second
         var x = setInterval(function() {
+          if (pause) {
+              // Get today's date and time
+            var now = new Date().getTime();
 
-          // Get today's date and time
-          var now = new Date().getTime();
+            // Find the distance between now and the count down date
+            //var distance = countDownDate - now;
+            //var distance = ( now + timeRemaining ) - now;
+            var distance = timeRemaining;
 
-          // Find the distance between now and the count down date
-          //var distance = countDownDate - now;
-          //var distance = ( now + timeRemaining ) - now;
-          var distance = timeRemaining;
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-          // Time calculations for days, hours, minutes and seconds
-          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Display the result in the element with id="demo"
+            document.getElementById("timer-countdown").innerHTML = ('0' + hours).slice(-2) + "h "
+            + ('0' + minutes).slice(-2) + "m " + ('0' + seconds).slice(-2) + "s ";
 
-          // Display the result in the element with id="demo"
-          document.getElementById("demo").innerHTML = ('0' + hours).slice(-2) + "h "
-          + ('0' + minutes).slice(-2) + "m " + ('0' + seconds).slice(-2) + "s ";
-          
-          timeRemaining = timeRemaining - 1000;
 
-          // If the count down is finished, write some text
-          if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "EXPIRED";
+            timeRemaining = timeRemaining - 1000;
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("timer-countdown").innerHTML = "TIME EXPIRED";
+            }
           }
+          
         }, 1000);
+        
+        function displayInterval(){
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            //var distance = countDownDate - now;
+            //var distance = ( now + timeRemaining ) - now;
+            var distance = timeRemaining;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("timer-countdown").innerHTML = ('0' + hours).slice(-2) + "h "
+            + ('0' + minutes).slice(-2) + "m " + ('0' + seconds).slice(-2) + "s ";
+            
+            pause = false;
+            document.getElementById("pauseButton").innerHTML = "Start";
+        }
+        
+        function pauseTimer(){
+            if (pause) {
+                pause = false;
+                document.getElementById("pauseButton").innerHTML = "Start";
+            }
+            else {
+                document.getElementById("pauseButton").innerHTML = "Pause";
+                pause = true;
+            }
+        }
 		
 		function startTimeClock() {
 		  var element = 'clock-time';
