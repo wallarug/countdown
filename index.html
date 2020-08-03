@@ -83,6 +83,13 @@
 					<span style="font-size:36px" id="timer-date"></span> </br />
 					<span style="font-size:72px;" id="timer-time"></span>
 				</p>
+                
+                <p style="text-align:center; font-size:72px;">
+                    <span style="font-size:72px" id="timer-hour"></span> h
+                    <span style="font-size:72px" id="timer-minute"></span> m
+                    <span style="font-size:72px" id="timer-second"></span> s </br />
+                </p>
+                
 				
 				
             </div>
@@ -90,21 +97,25 @@
             <!-- Settings Tab -->
             <div id="settings">
                 <form class="form-inline" id="countform1">
+                <h3> Timer Settings </h3>
+                <div class="ui-field-contain">
 					<label for="hours"> Hours: </label>
-					<input type="text" name="hours" id="hours"/>
-					<br />
+					<input type="text" name="hours" id="hours" value="1"/>
+                    <label for="minutes"> Minutes: </label>
+					<input type="text" name="minutes" id="minutes" value="0"/>
+                    <label for="seconds"> Seconds: </label>
+					<input type="text" name="seconds" id="seconds" value="0"/>
+                </div>
+				<div class="ui-field-contain">	
 					
-					<label for="minutes"> Minutes: </label>
-					<input type="text" name="minutes" id="minutes"/>
-					<br />
+				</div>
+				<div class="ui-field-contain">	
 					
-					<label for="seconds"> Seconds: </label>
-					<input type="text" name="seconds" id="seconds"/>
-					<br />
-					
+				</div>
+				<div class="ui-field-contain">	
 					<label for="details"> Details: </label>
 					<textarea  type="text" name="details" id="details"/> </textarea>
-					<br />
+				</div>
 					
 					<button type="button" onclick="run()"> Go </button>
 				</form>
