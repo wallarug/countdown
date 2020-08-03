@@ -16,6 +16,29 @@
         $( "#tabs" ).tabs();
       } );
     </script>
+	
+	<!-- <style> -->
+	<!-- /* Style the form - display items horizontally */ -->
+	<!-- .form-inline { -->
+	  <!-- display: flex; -->
+	  <!-- flex-flow: row wrap; -->
+	  <!-- align-items: center; -->
+	<!-- } -->
+
+	<!-- /* Add some margins for each label */ -->
+	<!-- .form-inline label { -->
+	  <!-- margin: 5px 10px 5px 0; -->
+	<!-- } -->
+
+	<!-- /* Style the input fields */ -->
+	<!-- .form-inline input { -->
+	  <!-- vertical-align: middle; -->
+	  <!-- margin: 5px 10px 5px 0; -->
+	  <!-- padding: 10px; -->
+	  <!-- background-color: #fff; -->
+	  <!-- border: 1px solid #ddd; -->
+	<!-- } -->
+	<!-- </style> -->
 </head>
 <body>
 
@@ -37,8 +60,8 @@
         <div data-role="tabs" id="tabs">
             <div data-role="navbar">
               <ul>
-                <li><a href="#clock" data-ajax="false" onclick="startTime()">Clock</a></li>
-                <li><a href="#timer" data-ajax="false">Timer</a></li>
+                <li><a href="#clock" data-ajax="false" onclick="startTimeClock()">Clock</a></li>
+                <li><a href="#timer" data-ajax="false" onclick="startTimer()">Timer</a></li>
                 <li><a href="#settings" data-ajax="false">Settings</a></li>
               </ul>
             </div>
@@ -56,9 +79,9 @@
             <!-- Timer Tab -->
             <div id="timer">
                 <br />
-				<p style="text-align:center; font-size:36px">
-					<span id="timer-date"></span>
-					<span id="timer-time"></span>
+				<p style="text-align:center; ">
+					<span style="font-size:36px" id="timer-date"></span> </br />
+					<span style="font-size:72px;" id="timer-time"></span>
 				</p>
 				
 				
@@ -66,7 +89,27 @@
 
             <!-- Settings Tab -->
             <div id="settings">
-                
+                <form class="form-inline" id="countform1">
+					<label for="hours"> Hours: </label>
+					<input type="text" name="hours" id="hours"/>
+					<br />
+					
+					<label for="minutes"> Minutes: </label>
+					<input type="text" name="minutes" id="minutes"/>
+					<br />
+					
+					<label for="seconds"> Seconds: </label>
+					<input type="text" name="seconds" id="seconds"/>
+					<br />
+					
+					<label for="details"> Details: </label>
+					<textarea  type="text" name="details" id="details"/>
+					
+					</textarea>
+					<br />
+					
+					<button type="button" onclick="run()"> Go </button>
+				</form>
 				
 				
 				
@@ -83,7 +126,7 @@
 		var dt = new Date();
 		//document.getElementById("clock-time").innerHTML = dt.toLocaleTimeString();
 		
-		function startTime() {
+		function startTimeClock() {
 		  var element = 'clock-time';
 		  var today = new Date();
 		  var h = today.getHours();
@@ -93,7 +136,7 @@
 		  s = checkTime(s);
 		  document.getElementById(element).innerHTML =
 		  h + ":" + m + ":" + s;
-		  var t = setTimeout(startTime, 500);
+		  var t = setTimeout(startTimeClock, 500);
 		  
 		  startDate('clock-date');
 		}
@@ -108,6 +151,12 @@
 		function checkTime(i) {
 		  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
 		  return i;
+		}
+		
+		function startTimer() {
+			
+		
+		
 		}
 		
 		//document.getElementById("clock-time").innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
