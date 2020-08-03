@@ -80,8 +80,9 @@
             <div id="timer">
                 <br />
 				<p style="text-align:center; ">
-					<span style="font-size:36px" id="timer-date"></span> </br />
-					<span style="font-size:72px;" id="timer-time"></span>
+                    <span style="font-size:42px;" id="timer-time"></span> </br />
+					<span style="font-size:36px" id="timer-date"></span>
+					
 				</p>
                 
                 <p style="text-align:center; font-size:72px;">
@@ -223,17 +224,21 @@
 		  var s = today.getSeconds();
 		  m = checkTime(m);
 		  s = checkTime(s);
-		  document.getElementById(element).innerHTML =
+		  document.getElementById('clock-time').innerHTML =
 		  h + ":" + m + ":" + s;
+          document.getElementById('timer-time').innerHTML =
+		  h + ":" + m;
 		  var t = setTimeout(startTimeClock, 500);
 		  
-		  startDate('clock-date');
+		  startDate();
 		}
 		
-		function startDate(element) {
+		function startDate() {
 			var today = new Date();
 			var dd = today.toLocaleDateString();
-			document.getElementById(element).innerHTML =
+			document.getElementById('clock-date').innerHTML =
+			dd;
+            document.getElementById('timer-date').innerHTML =
 			dd;
 		}
 		
@@ -243,7 +248,6 @@
 		}
 		
 		function startTimer() {
-			
 		
 		
 		}
