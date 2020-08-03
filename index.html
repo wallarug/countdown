@@ -109,12 +109,6 @@
 					<input type="text" name="seconds" id="seconds" value="0"/>
                 </div>
 				<div class="ui-field-contain">	
-					
-				</div>
-				<div class="ui-field-contain">	
-					
-				</div>
-				<div class="ui-field-contain">	
 					<label for="details"> Details: </label>
 					<textarea  type="text" name="details" id="details"/> </textarea>
 				</div>
@@ -167,8 +161,8 @@
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Display the result in the element with id="demo"
-            document.getElementById("timer-countdown").innerHTML = ('0' + hours).slice(-2) + "h "
-            + ('0' + minutes).slice(-2) + "m " + ('0' + seconds).slice(-2) + "s ";
+            document.getElementById("timer-countdown").innerHTML = ('0' + hours).slice(-2) + " h "
+            + ('0' + minutes).slice(-2) + " m " + ('0' + seconds).slice(-2) + " s ";
 
 
             timeRemaining = timeRemaining - 1000;
@@ -198,8 +192,8 @@
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Display the result in the element with id="demo"
-            document.getElementById("timer-countdown").innerHTML = ('0' + hours).slice(-2) + "h "
-            + ('0' + minutes).slice(-2) + "m " + ('0' + seconds).slice(-2) + "s ";
+            document.getElementById("timer-countdown").innerHTML = ('0' + hours).slice(-2) + " h "
+            + ('0' + minutes).slice(-2) + " m " + ('0' + seconds).slice(-2) + " s ";
             
             pause = false;
             document.getElementById("pauseButton").innerHTML = "Start";
@@ -251,6 +245,15 @@
 		
 		
 		}
+        
+        function parseDetails(){
+            var text = document.getElementById("details").value;
+            console.log(text);
+        
+        
+        
+        
+        }
 		
 		//document.getElementById("clock-time").innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
 	</script>
