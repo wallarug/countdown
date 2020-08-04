@@ -67,7 +67,7 @@
 				<!-- control buttons -->
                 <div style="text-align:center">
                     <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonTimer" style=" width: 200px;"> Start </a>
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;"> Reset </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(1)" style=" width: 200px;"> Reset </a>
                 </div>
                 
             </div>
@@ -94,7 +94,7 @@
                 <!-- control buttons -->
                 <div style="text-align:center">
                     <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam1" style=" width: 200px;"> Start </a>
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;" value="1"> Reset </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(2)" style=" width: 200px;" > Reset </a>
                 </div>
 			
 			</div>
@@ -179,14 +179,14 @@ Writing Time:  h   m
 		var clockDateElements = ["clock-date", "exam1-date", "exam2-date"];
 		var informationElements = ["exam1-information", "exam2-information"];
         
-        function setTimer(){
+        function setTimer(val){
             var today = new Date().getTime();
             var hh = document.getElementById("hours").value;
             var mm = document.getElementById("minutes").value;
             var ss = document.getElementById("seconds").value;
             timeRemaining = (hh*3600000) + (mm*60000) + (ss*1000);
             displayInterval();
-			parseDetails();
+			parseDetails(val);
         }
 
         // Update the count down every 1 second
@@ -304,7 +304,7 @@ Writing Time:  h   m
 			startDate();
 		}
         
-        function parseDetails(){
+        function parseDetails(val){
             var text = document.getElementById("details").value;
             var arr = text.split(";");
             var output = "";
@@ -318,9 +318,7 @@ Writing Time:  h   m
 					'<p><span style="font-size:72px;">' + parts[0] + '</span> </br> \
 					<span style="font-size:53px">' + parts[1] + ' </span></br> \
 					<span style="font-size:53px">' + parts[2] + ' </span></br></p>';
-				
-				}
-                
+				}  
             } else {
                 // more than 1 subject (let's come back to this later)
                 var clssBlock = "";
@@ -340,8 +338,11 @@ Writing Time:  h   m
                         clssDiv = "";
                 }
                 
-                output = '<div class="' + clssDiv + '">';
-
+				// only create another grid if we are on exam page 1.
+				if (val == "1"){
+					output = '<div class="' + clssDiv + '">';
+				}
+				
                 for (i=0; i < arr.length; i++){
                     switch(i){
                         case 0:
@@ -357,9 +358,15 @@ Writing Time:  h   m
                             clssBlock = "ui-block-a";
                     }
                     
+					// take the text and split by newline
                     var parts = arr[i].split("\n");
-                    console.log(parts);
-                    output += '<div class="' + clssBlock + '"><div class="ui-bar ui-bar-b" style="height:500px"><p>';
+					
+					// only create another grid if we are on exam page 1.
+					if(val == "1"){
+						output += '<div class="' + clssBlock + '"><div class="ui-bar ui-bar-b" style="height:500px">';
+					}
+					
+					output += "<p>";
                     
                     var firstRow = true;
                     for (j=0; j < parts.length; j++){
@@ -376,10 +383,17 @@ Writing Time:  h   m
                         }
                     }
                     
-                    output += "</p></div></div>";
+                    output += "</p>"
+					
+					if(val == "1"){
+						output += "</div></div>";
+					}
                 }
                 
-                output += '</div>';
+				if(val == "1"){
+					output += '</div>';
+				}
+				
 				for(var i = 0; i < informationElements.length; i++) {
 					document.getElementById(informationElements[i]).innerHTML = output;
                 }            
