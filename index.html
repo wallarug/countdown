@@ -38,10 +38,10 @@
         <div data-role="tabs" id="tabs">
             <div data-role="navbar">
               <ul>
-                <li><a href="#clock" data-ajax="false" onclick="startTimeClock()">Clock</a></li>
-                <li><a href="#timer" data-ajax="false" onclick="startTimer()">Timer</a></li>
-				<li><a href="#exam-1" data-ajax="false" onclick="startExam1()">Exam 1</a></li>
-				<li><a href="#exam-2" data-ajax="false" onclick="startExam2()">Exam 2</a></li>
+                <li><a href="#clock" data-ajax="false" onclick="onTabClick()">Clock</a></li>
+                <li><a href="#timer" data-ajax="false" onclick="onTabClick()">Timer</a></li>
+				<li><a href="#exam-1" data-ajax="false" onclick="onTabClick()">Exam 1</a></li>
+				<li><a href="#exam-2" data-ajax="false" onclick="onTabClick()">Exam 2</a></li>
                 <li><a href="#settings" data-ajax="false">Settings</a></li>
               </ul>
             </div>
@@ -104,13 +104,13 @@
 				
 				<!-- Date and Time  -->
 				<p style="text-align:center; ">
-                    <span style="font-size:42px;" id="exam1-time"></span> </br />
-					<span style="font-size:36px" id="exam1-date"></span>
+                    <span style="font-size:42px;" id="exam2-time"></span> </br />
+					<span style="font-size:36px" id="exam2-date"></span>
 				</p>
                 
                 <!-- Countdown Timer  -->
                 <p style="text-align:center; font-size:72px;">
-                    <span style="font-size:100px" id="exam1-countdown">Not configured.</span> </br />
+                    <span style="font-size:100px" id="exam2-countdown">Not configured.</span> </br />
                 </p>
                 
                 <!-- Text or Info  -->
@@ -290,9 +290,10 @@ Writing Time:  h   m
 		  return i;
 		}
 		
-		function startTimer() {
-            startTimeClock();
-		
+		// function for all tab clicks
+		function onTabClick(){
+			startTimeClock();
+			startDate();
 		}
         
         function parseDetails(){
