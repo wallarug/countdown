@@ -258,7 +258,7 @@ Writing: h m
             console.log(text);
             var arr = text.split(";");
             
-            '<p><span style="frot-size:72px;">' + + '</span> </br><span style="font-size:66px">'
+            //'<p><span style="frot-size:72px;">' + + '</span> </br><span style="font-size:66px">'
             
             if (arr.length > 1) {
                 // more than 1 subject (let's come back to this later)
@@ -266,7 +266,12 @@ Writing: h m
             
             } else {
                 // only one subject (easy case)
-                
+                var parts = arr[0].split("\n");
+                console.log(parts);
+                document.getElementById('information').innerHTML =
+                '<p><span style="frot-size:72px;">' + parts[0] + '</span> </br> \
+                <span style="font-size:66px">' + parts[1] + ' </span></br> \
+                <span style="font-size:66px">' + parts[2] + ' </span></br>';
             
             }
         
