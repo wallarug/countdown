@@ -40,6 +40,8 @@
               <ul>
                 <li><a href="#clock" data-ajax="false" onclick="startTimeClock()">Clock</a></li>
                 <li><a href="#timer" data-ajax="false" onclick="startTimer()">Timer</a></li>
+				<li><a href="#exam-1" data-ajax="false" onclick="startExam1()">Exam 1</a></li>
+				<li><a href="#exam-2" data-ajax="false" onclick="startExam2()">Exam 2</a></li>
                 <li><a href="#settings" data-ajax="false">Settings</a></li>
               </ul>
             </div>
@@ -56,31 +58,73 @@
 
             <!-- Timer Tab -->
             <div id="timer">
-                <br />
-                
-                <!-- Date and Time  -->
-				<p style="text-align:center; ">
-                    <span style="font-size:42px;" id="timer-time"></span> </br />
-					<span style="font-size:36px" id="timer-date"></span>
-				</p>
-                
+                <br />                
                 <!-- Countdown Timer  -->
                 <p style="text-align:center; font-size:72px;">
                     <span style="font-size:100px" id="timer-countdown">Not configured.</span> </br />
                 </p>
+				
+				<!-- control buttons -->
+                <div style="text-align:center">
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonTimer" style=" width: 200px;"> Start </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;"> Reset </a>
+                </div>
+                
+            </div>
+			
+			<div id="exam-1">
+				<br />
+				
+				<!-- Date and Time  -->
+				<p style="text-align:center; ">
+                    <span style="font-size:42px;" id="exam1-time"></span> </br />
+					<span style="font-size:36px" id="exam1-date"></span>
+				</p>
+                
+                <!-- Countdown Timer  -->
+                <p style="text-align:center; font-size:72px;">
+                    <span style="font-size:100px" id="exam1-countdown">Not configured.</span> </br />
+                </p>
                 
                 <!-- Text or Info  -->
-				<div id="information" style="text-align:center">
+				<div id="exam1-information" style="text-align:center">
                 
                 </div>
                 
                 <!-- control buttons -->
                 <div style="text-align:center">
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButton" style=" width: 200px;"> Start </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam1" style=" width: 200px;"> Start </a>
                     <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;"> Reset </a>
                 </div>
+			
+			</div>
+			
+			<div id="exam-2">
+				<br />
+				
+				<!-- Date and Time  -->
+				<p style="text-align:center; ">
+                    <span style="font-size:42px;" id="exam1-time"></span> </br />
+					<span style="font-size:36px" id="exam1-date"></span>
+				</p>
                 
-            </div>
+                <!-- Countdown Timer  -->
+                <p style="text-align:center; font-size:72px;">
+                    <span style="font-size:100px" id="exam1-countdown">Not configured.</span> </br />
+                </p>
+                
+                <!-- Text or Info  -->
+				<div id="exam1-information" style="text-align:center">
+                
+                </div>
+                
+                <!-- control buttons -->
+                <div style="text-align:center">
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam2" style=" width: 200px;"> Start </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;"> Reset </a>
+                </div>
+			
+			</div>
 
             <!-- Settings Tab -->
             <div id="settings">
@@ -123,6 +167,10 @@ Writing Time:  h   m
         // Set the date we're counting down to
         var timeRemaining;
         var pause = false;
+		var timerElements = ["timer-countdown", "exam1-countdown", "exam2-countdown"];
+		var buttonElements = ["pauseButtonTimer", "pauseButtonExam1", "pauseButtonExam2"];
+		var clockTimeElements = ["clock-time", "exam1-time", "exam2-time"];
+		var clockDateElements = ["clock-date", "exam1-date", "exam2-date"];
         
         function setTimer(){
             var today = new Date().getTime();
@@ -150,17 +198,20 @@ Writing Time:  h   m
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Display the result in the element with id="demo"
-            document.getElementById("timer-countdown").innerHTML = ('0' + hours).slice(-2) + " h "
-            + ('0' + minutes).slice(-2) + " m " + ('0' + seconds).slice(-2) + " s ";
-
+            // Display the result
+			for(var i=0; i < timerElements.length; i++){
+				document.getElementById(timerElements[i]).innerHTML = ('0' + hours).slice(-2) + " h "
+				+ ('0' + minutes).slice(-2) + " m " + ('0' + seconds).slice(-2) + " s ";
+			}
 
             timeRemaining = timeRemaining - 1000;
 
             // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
-                document.getElementById("timer-countdown").innerHTML = "TIME EXPIRED";
+				for(var i=0; i < timerElements.length; i++){
+					document.getElementById(timerElements[i]).innerHTML = "TIME EXPIRED";
+				}
             }
           }
           
@@ -181,9 +232,11 @@ Writing Time:  h   m
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Display the result in the element with id="demo"
-            document.getElementById("timer-countdown").innerHTML = ('0' + hours).slice(-2) + " h "
-            + ('0' + minutes).slice(-2) + " m " + ('0' + seconds).slice(-2) + " s ";
+            // Display the result
+			for(var i=0; i < timerElements.length; i++){
+				document.getElementById(timerElements[i]).innerHTML = ('0' + hours).slice(-2) + " h "
+				+ ('0' + minutes).slice(-2) + " m " + ('0' + seconds).slice(-2) + " s ";
+			}
             
             pause = false;
             document.getElementById("pauseButton").innerHTML = "Start";
@@ -194,38 +247,42 @@ Writing Time:  h   m
         function pauseTimer(){
             if (pause) {
                 pause = false;
-                document.getElementById("pauseButton").innerHTML = "Start";
+				for(var i=0; i < buttonElements.length; i++){
+					document.getElementById(buttonElements[i]).innerHTML = "Start";
+				}
             }
             else {
-                document.getElementById("pauseButton").innerHTML = "Pause";
                 pause = true;
+				for(var i=0; i < buttonElements.length; i++){
+					document.getElementById(buttonElements[i]).innerHTML = "Start";
+				}
             }
         }
 		
 		function startTimeClock() {
-		  var element = 'clock-time';
 		  var today = new Date();
 		  var h = today.getHours();
 		  var m = today.getMinutes();
 		  var s = today.getSeconds();
 		  m = checkTime(m);
 		  s = checkTime(s);
-		  document.getElementById('clock-time').innerHTML =
-		  h + ":" + m + ":" + s;
-          document.getElementById('timer-time').innerHTML =
-		  h + ":" + m;
-		  var t = setTimeout(startTimeClock, 500);
 		  
-		  startDate();
+		  for(var i=0; i < clockTimeElements.length; i++){
+				document.getElementById(clockTimeElements[i]).innerHTML =
+				h + ":" + m + ":" + s;
+		  }
+		  
+		  var t = setTimeout(startTimeClock, 500);
 		}
 		
 		function startDate() {
 			var today = new Date();
 			var dd = today.toLocaleDateString();
-			document.getElementById('clock-date').innerHTML =
-			dd;
-            document.getElementById('timer-date').innerHTML =
-			dd;
+			
+			for(var i=0; i < clockDateElements.length; i++){
+				document.getElementById(clockDateElements[i]).innerHTML =
+				dd;
+			}
 		}
 		
 		function checkTime(i) {
