@@ -67,7 +67,7 @@
 				<!-- control buttons -->
                 <div style="text-align:center">
                     <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonTimer" style=" width: 200px;"> Start </a>
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(1)" style=" width: 200px;"> Reset </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(0)" style=" width: 200px;"> Reset </a>
                 </div>
                 
             </div>
@@ -94,7 +94,7 @@
                 <!-- control buttons -->
                 <div style="text-align:center">
                     <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam1" style=" width: 200px;"> Start </a>
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(2)" style=" width: 200px;" > Reset </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(1)" style=" width: 200px;" > Reset </a>
                 </div>
 			
 			</div>
@@ -124,7 +124,7 @@
 						<!-- control buttons -->
 						<div style="text-align:center">
 							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam2" style=" width: 200px;"> Start </a>
-							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;" value="2"> Reset </a>
+							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(2)" style=" width: 200px;" value="2"> Reset </a>
 						</div>
 
 					</div></div>
@@ -308,6 +308,8 @@ Writing Time:  h   m
             var text = document.getElementById("details").value;
             var arr = text.split(";");
             var output = "";
+			
+			console.log(val);
             
             if (arr.length == 1) {
                 // only one subject (easy case)
