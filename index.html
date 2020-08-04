@@ -94,7 +94,7 @@
                 <!-- control buttons -->
                 <div style="text-align:center">
                     <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam1" style=" width: 200px;"> Start </a>
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;"> Reset </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;" value="1"> Reset </a>
                 </div>
 			
 			</div>
@@ -103,13 +103,13 @@
 				<br />
 				
 				<div class="ui-grid-a">
-					<div class="ui-block-a"><div class="ui-bar ui-bar-b">
+					<div class="ui-block-a"><div class="ui-bar ui-bar-b" style="height:500px;">
 						<div id="exam2-information" style="text-align:center">
 						
 						</div>
 					</div></div>
 					
-					<div class="ui-block-b"><div class="ui-bar ui-bar-b">
+					<div class="ui-block-b"><div class="ui-bar ui-bar-b" style="height:500px;">
 						<!-- Date and Time  -->
 						<p style="text-align:center; ">
 							<span style="font-size:42px;" id="exam2-time"></span> </br />
@@ -124,7 +124,7 @@
 						<!-- control buttons -->
 						<div style="text-align:center">
 							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam2" style=" width: 200px;"> Start </a>
-							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;"> Reset </a>
+							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;" value="2"> Reset </a>
 						</div>
 
 					</div></div>
@@ -306,9 +306,7 @@ Writing Time:  h   m
         
         function parseDetails(){
             var text = document.getElementById("details").value;
-            console.log(text);
             var arr = text.split(";");
-            
             var output = "";
             
             if (arr.length == 1) {
@@ -361,7 +359,7 @@ Writing Time:  h   m
                     
                     var parts = arr[i].split("\n");
                     console.log(parts);
-                    output += '<div class="' + clssBlock + '"><div class="ui-bar ui-bar-b" style="height:300px"><p>';
+                    output += '<div class="' + clssBlock + '"><div class="ui-bar ui-bar-b" style="height:500px"><p>';
                     
                     var firstRow = true;
                     for (j=0; j < parts.length; j++){
