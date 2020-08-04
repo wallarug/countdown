@@ -16,29 +16,7 @@
         $( "#tabs" ).tabs();
       } );
     </script>
-	
-	<!-- <style> -->
-	<!-- /* Style the form - display items horizontally */ -->
-	<!-- .form-inline { -->
-	  <!-- display: flex; -->
-	  <!-- flex-flow: row wrap; -->
-	  <!-- align-items: center; -->
-	<!-- } -->
 
-	<!-- /* Add some margins for each label */ -->
-	<!-- .form-inline label { -->
-	  <!-- margin: 5px 10px 5px 0; -->
-	<!-- } -->
-
-	<!-- /* Style the input fields */ -->
-	<!-- .form-inline input { -->
-	  <!-- vertical-align: middle; -->
-	  <!-- margin: 5px 10px 5px 0; -->
-	  <!-- padding: 10px; -->
-	  <!-- background-color: #fff; -->
-	  <!-- border: 1px solid #ddd; -->
-	<!-- } -->
-	<!-- </style> -->
 </head>
 <body>
 
@@ -79,23 +57,29 @@
             <!-- Timer Tab -->
             <div id="timer">
                 <br />
+                
+                <!-- Date and Time  -->
 				<p style="text-align:center; ">
                     <span style="font-size:42px;" id="timer-time"></span> </br />
 					<span style="font-size:36px" id="timer-date"></span>
-					
 				</p>
                 
+                <!-- Countdown Timer  -->
                 <p style="text-align:center; font-size:72px;">
                     <span style="font-size:72px" id="timer-countdown">Not configured.</span> </br />
                 </p>
-                <div style="text-align:center">
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButton"> Start </a>
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()"> Reset </a>
-                </div>
-				
+                
+                <!-- Text or Info  -->
 				<div id="information" style="text-align:center">
-                    
+                
                 </div>
+                
+                <!-- control buttons -->
+                <div style="text-align:center">
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButton" style=" width: 200px;"> Start </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;"> Reset </a>
+                </div>
+                
             </div>
 
             <!-- Settings Tab -->
@@ -113,8 +97,9 @@
 				<div class="ui-field-contain">	
 					<label for="details"> Details: </label>
 					<textarea  type="text" name="details" id="details" rows="8"/>
-Reading: h m
-Writing: h m
+
+Reading Time:  m
+Writing Time:  h   m
  </textarea>
 				</div>
 					
@@ -258,22 +243,81 @@ Writing: h m
             console.log(text);
             var arr = text.split(";");
             
+            var output = "";
+            
             //'<p><span style="frot-size:72px;">' + + '</span> </br><span style="font-size:66px">'
             
-            if (arr.length > 1) {
-                // more than 1 subject (let's come back to this later)
-            
-            
-            } else {
+            if (arr.length == 1) {
                 // only one subject (easy case)
                 var parts = arr[0].split("\n");
                 console.log(parts);
                 document.getElementById('information').innerHTML =
-                '<p><span style="frot-size:72px;">' + parts[0] + '</span> </br> \
-                <span style="font-size:66px">' + parts[1] + ' </span></br> \
-                <span style="font-size:66px">' + parts[2] + ' </span></br>';
+                '<p><span style="font-size:72px;">' + parts[0] + '</span> </br> \
+                <span style="font-size:53px">' + parts[1] + ' </span></br> \
+                <span style="font-size:53px">' + parts[2] + ' </span></br></p>';
+            } else {
+                // more than 1 subject (let's come back to this later)
+                var clssBlock = "";
+                var clssDiv = "";
+                
+                switch(arr.length){
+                    case 1:
+                        clssDiv = "ui-block-a";
+                        break;
+                    case 2:
+                        clssDiv = "ui-grid-a";
+                        break;
+                    case 3:
+                        clssDiv = "ui-grid-b";
+                        break;
+                     default:
+                        clssDiv = "";
+                }
+                
+                output = '<div class="' + clssDiv + '">';
+
+                for (i=0; i < arr.length; i++){
+                    switch(i){
+                        case 0:
+                            clssBlock = "ui-block-a";
+                            break;
+                        case 1:
+                            clssBlock = "ui-block-b";
+                            break;
+                        case 2:
+                            clssBlock = "ui-block-c";
+                            break;
+                        default:
+                            clssBlock = "ui-block-a";
+                    }
+                    
+                    var parts = arr[i].split("\n");
+                    console.log(parts);
+                    output += '<div class="' + clssBlock + '"><div class="ui-bar ui-bar-a" style="height:300px"><p>';
+                    
+                    var firstRow = true;
+                    for (j=0; j < parts.length; j++){
+                        if(parts[j] == ""){
+                            // empty, don't do anything
+                            continue;
+                        } else {
+                            if (firstRow){
+                                output += '<span style="font-size:72px;">' + parts[j] + '</span> </br>';
+                                firstRow = false;
+                            } else {
+                                output += '<span style="font-size:53px">' + parts[j] + ' </span></br>';
+                            }
+                        }
+                    }
+                    
+                    output += "</p></div></div>";
+                }
+                
+                output += '</div>';
+                document.getElementById('information').innerHTML = output;
             
             }
+            
         
         
         
