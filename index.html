@@ -89,11 +89,13 @@
                     <span style="font-size:72px" id="timer-countdown">Not configured.</span> </br />
                 </p>
                 <div style="text-align:center">
-                <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButton"> Start </a>
-                <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()"> Reset </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButton"> Start </a>
+                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()"> Reset </a>
                 </div>
 				
-				
+				<div id="information" style="text-align:center">
+                    
+                </div>
             </div>
 
             <!-- Settings Tab -->
@@ -110,7 +112,10 @@
                 </div>
 				<div class="ui-field-contain">	
 					<label for="details"> Details: </label>
-					<textarea  type="text" name="details" id="details"/> </textarea>
+					<textarea  type="text" name="details" id="details" rows="8"/>
+Reading: h m
+Writing: h m
+ </textarea>
 				</div>
 					
 					<button type="button" onclick="setTimer()"> Go </button>
@@ -197,6 +202,8 @@
             
             pause = false;
             document.getElementById("pauseButton").innerHTML = "Start";
+            
+            parseDetails();
         }
         
         function pauseTimer(){
@@ -249,6 +256,19 @@
         function parseDetails(){
             var text = document.getElementById("details").value;
             console.log(text);
+            var arr = text.split(";");
+            
+            '<p><span style="frot-size:72px;">' + + '</span> </br><span style="font-size:66px">'
+            
+            if (arr.length > 1) {
+                // more than 1 subject (let's come back to this later)
+            
+            
+            } else {
+                // only one subject (easy case)
+                
+            
+            }
         
         
         
