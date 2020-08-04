@@ -179,6 +179,7 @@ Writing Time:  h   m
             var ss = document.getElementById("seconds").value;
             timeRemaining = (hh*3600000) + (mm*60000) + (ss*1000);
             displayInterval();
+			parseDetails();
         }
 
         // Update the count down every 1 second
@@ -239,9 +240,9 @@ Writing Time:  h   m
 			}
             
             pause = false;
-            document.getElementById("pauseButton").innerHTML = "Start";
-            
-            parseDetails();
+			for(var i=0; i < buttonElements.length; i++){
+				document.getElementById(buttonElements[i]).innerHTML = "Start";
+			}
         }
         
         function pauseTimer(){
@@ -373,14 +374,7 @@ Writing Time:  h   m
                 document.getElementById('information').innerHTML = output;
             
             }
-            
-        
-        
-        
-        
         }
-		
-		//document.getElementById("clock-time").innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
 	</script>
 
 </body>
