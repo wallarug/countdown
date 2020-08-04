@@ -102,27 +102,33 @@
 			<div id="exam-2">
 				<br />
 				
-				<!-- Date and Time  -->
-				<p style="text-align:center; ">
-                    <span style="font-size:42px;" id="exam2-time"></span> </br />
-					<span style="font-size:36px" id="exam2-date"></span>
-				</p>
-                
-                <!-- Countdown Timer  -->
-                <p style="text-align:center; font-size:72px;">
-                    <span style="font-size:100px" id="exam2-countdown">Not configured.</span> </br />
-                </p>
-                
-                <!-- Text or Info  -->
-				<div id="exam1-information" style="text-align:center">
-                
-                </div>
-                
-                <!-- control buttons -->
-                <div style="text-align:center">
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam2" style=" width: 200px;"> Start </a>
-                    <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;"> Reset </a>
-                </div>
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><div class="ui-bar ui-bar-b">
+						<div id="exam2-information" style="text-align:center">
+						
+						</div>
+					</div></div>
+					
+					<div class="ui-block-b"><div class="ui-bar ui-bar-b">
+						<!-- Date and Time  -->
+						<p style="text-align:center; ">
+							<span style="font-size:42px;" id="exam2-time"></span> </br />
+							<span style="font-size:36px" id="exam2-date"></span>
+						</p>
+						
+						<!-- Countdown Timer  -->
+						<p style="text-align:center; font-size:72px;">
+							<span style="font-size:100px" id="exam2-countdown">Not configured.</span> </br />
+						</p>
+						
+						<!-- control buttons -->
+						<div style="text-align:center">
+							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam2" style=" width: 200px;"> Start </a>
+							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer()" style=" width: 200px;"> Reset </a>
+						</div>
+
+					</div></div>
+				</div>
 			
 			</div>
 
@@ -171,6 +177,7 @@ Writing Time:  h   m
 		var buttonElements = ["pauseButtonTimer", "pauseButtonExam1", "pauseButtonExam2"];
 		var clockTimeElements = ["clock-time", "exam1-time", "exam2-time"];
 		var clockDateElements = ["clock-date", "exam1-date", "exam2-date"];
+		var informationElements = ["exam1-information", "exam2-information"];
         
         function setTimer(){
             var today = new Date().getTime();
@@ -308,10 +315,14 @@ Writing Time:  h   m
                 // only one subject (easy case)
                 var parts = arr[0].split("\n");
                 console.log(parts);
-                document.getElementById('information').innerHTML =
-                '<p><span style="font-size:72px;">' + parts[0] + '</span> </br> \
-                <span style="font-size:53px">' + parts[1] + ' </span></br> \
-                <span style="font-size:53px">' + parts[2] + ' </span></br></p>';
+				for(var i = 0; i < informationElements.length; i++) {
+					document.getElementById(informationElements[i]).innerHTML =
+					'<p><span style="font-size:72px;">' + parts[0] + '</span> </br> \
+					<span style="font-size:53px">' + parts[1] + ' </span></br> \
+					<span style="font-size:53px">' + parts[2] + ' </span></br></p>';
+				
+				}
+                
             } else {
                 // more than 1 subject (let's come back to this later)
                 var clssBlock = "";
@@ -371,8 +382,9 @@ Writing Time:  h   m
                 }
                 
                 output += '</div>';
-                document.getElementById('information').innerHTML = output;
-            
+				for(var i = 0; i < informationElements.length; i++) {
+					document.getElementById(informationElements[i]).innerHTML = output;
+                }            
             }
         }
 	</script>
