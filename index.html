@@ -299,7 +299,7 @@ Writing Time:  h   m
 		  var m = today.getMinutes();
 		  var s = today.getSeconds();
 		  
-          // verify that the minutes & seconds come back as a sensible unit.
+          // add zeros to start if < 10.
           m = checkTime(m);
 		  s = checkTime(s);
 		  
@@ -328,16 +328,30 @@ Writing Time:  h   m
 			}
 		}
 		
+        /*
+         *  Helper function for formatting numbers.
+         */
 		function checkTime(i) {
 		  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
 		  return i;
 		}
 		
-		// function for all tab clicks
-		function onTabClick(){
-			startTimeClock();
+        
+        /*
+         *  Functions to run on page load
+         */
+        $(document).delegate('.ui-page', 'pageshow', function () {
+            startTimeClock();
 			startDate();
+        });
+        
+        /*
+         *  Function run by clicking on tabs
+         */
+		function onTabClick(){
+			// does nothing at the moment.
 		}
+        
         /*
          *  Mathod for reading and formatting the information in the textfield for the 
          *   exam information.
