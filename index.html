@@ -233,7 +233,6 @@ Writing Time:  h   m
 				}
             }
           }
-          
         }, 1000);
         
         /*
@@ -243,9 +242,7 @@ Writing Time:  h   m
             // Get today's date and time
             var now = new Date().getTime();
 
-            // Find the distance between now and the count down date
-            //var distance = countDownDate - now;
-            //var distance = ( now + timeRemaining ) - now;
+            // Check how much time is remaining on the countdown.
             var distance = timeRemaining;
 
             // Time calculations for days, hours, minutes and seconds
@@ -255,52 +252,76 @@ Writing Time:  h   m
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Display the result
+            //  check all countdown elements (we have a few...)
 			for(var i=0; i < timerElements.length; i++){
 				document.getElementById(timerElements[i]).innerHTML = ('0' + hours).slice(-2) + " h "
 				+ ('0' + minutes).slice(-2) + " m " + ('0' + seconds).slice(-2) + " s ";
 			}
             
+            // set the initial state as paused (stationary)
             pause = false;
 			for(var i=0; i < buttonElements.length; i++){
 				document.getElementById(buttonElements[i]).innerHTML = "Start";
 			}
         }
         
+        /*
+         *  Change the "pauseButton".  Stops/Starts the timer.
+         */
         function pauseTimer(){
             if (pause) {
+                // stop the timer
                 pause = false;
+                
+                //  change all the button text elements (we have a few...)
 				for(var i=0; i < buttonElements.length; i++){
 					document.getElementById(buttonElements[i]).innerHTML = "Start";
 				}
             }
             else {
+                // start the timer
                 pause = true;
+                
+                //  change all the button text elements (we have a few...)
 				for(var i=0; i < buttonElements.length; i++){
 					document.getElementById(buttonElements[i]).innerHTML = "Stop";
 				}
             }
         }
 		
+        /*
+         *  Start all the clock elements
+         */
 		function startTimeClock() {
+          // set up the initial date today and split into hms.
 		  var today = new Date();
 		  var h = today.getHours();
 		  var m = today.getMinutes();
 		  var s = today.getSeconds();
-		  m = checkTime(m);
+		  
+          // verify that the minutes & seconds come back as a sensible unit.
+          m = checkTime(m);
 		  s = checkTime(s);
 		  
+          //  update all the clocks (we have a few...)
 		  for(var i=0; i < clockTimeElements.length; i++){
 				document.getElementById(clockTimeElements[i]).innerHTML =
 				h + ":" + m + ":" + s;
 		  }
 		  
+          // set a timeout so the clock updates every 1 second.
 		  var t = setTimeout(startTimeClock, 500);
 		}
 		
+        /*
+         *  Start all the date elements
+         */
 		function startDate() {
+            // get todays date and format as DD/MM/YYYY.
 			var today = new Date();
 			var dd = today.toLocaleDateString();
 			
+            //  update all the dates (we have a few...)
 			for(var i=0; i < clockDateElements.length; i++){
 				document.getElementById(clockDateElements[i]).innerHTML =
 				dd;
@@ -317,18 +338,24 @@ Writing Time:  h   m
 			startTimeClock();
 			startDate();
 		}
-        
+        /*
+         *  Mathod for reading and formatting the information in the textfield for the 
+         *   exam information.
+         */
         function parseDetails(val){
+            // get the data from the field and split if there are more than one
+            //  exams running (";" is the deliminator)
             var text = document.getElementById("details").value;
             var arr = text.split(";");
             var output = "";
-			
-			console.log(val);
             
+            // if there is only one element, we will format the output a little bit differently.
             if (arr.length == 1) {
                 // only one subject (easy case)
+                // split the lines.
                 var parts = arr[0].split("\n");
-                console.log(parts);
+                
+                // go through each page and format elements accordingly.
 				for(var i = 0; i < informationElements.length; i++) {
 					document.getElementById(informationElements[i]).innerHTML =
 					'<p><span style="font-size:72px;">' + parts[0] + '</span> </br> \
@@ -337,12 +364,15 @@ Writing Time:  h   m
 				}  
             } else {
                 // more than 1 subject (let's come back to this later)
+                // define variables
                 var clssBlock = "";
                 var clssDiv = "";
                 
+                // each block (1st, 2nd, etc) has a different class.
+                //  we will select them here.
                 switch(arr.length){
                     case 1:
-                        clssDiv = "ui-block-a";
+                        clssDiv = "ui-grid-a";
                         break;
                     case 2:
                         clssDiv = "ui-grid-a";
@@ -360,6 +390,8 @@ Writing Time:  h   m
 				}
 				
                 for (i=0; i < arr.length; i++){
+                    // each block (1st, 2nd, etc) has a different class.
+                    //  we will select them here.
                     switch(i){
                         case 0:
                             clssBlock = "ui-block-a";
