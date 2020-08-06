@@ -24,7 +24,6 @@
 
 	<div data-role="header">
 		<h1>The Clock</h1>
-		<!-- <a href="./" data-shadow="false" data-iconshadow="false" data-icon="carat-l" data-iconpos="notext" data-rel="back" data-ajax="false">Back</a> -->
 	</div><!-- /header -->
     
     <!-- Please update the image file in img/logo.png for your school.  Also change the background from #000000 (white) to your logo's background. -->
@@ -35,6 +34,8 @@
     <!-- begin body -->
     <div role="main" class="ui-content" style="background-color:#1d1d1d;">
 
+        <!-- begin tabs and the tab navbar -->
+        <!-- These names correspond to the sections below -->
         <div data-role="tabs" id="tabs">
             <div data-role="navbar">
               <ul>
@@ -54,7 +55,7 @@
 					<span style="font-size:72px;" id="clock-time"></span>
 				</p>
                 
-            </div>
+            </div> <!-- /clock tab -->
 
             <!-- Timer Tab -->
             <div id="timer">
@@ -70,11 +71,13 @@
                     <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(0)" style=" width: 200px;"> Reset </a>
                 </div>
                 
-            </div>
+            </div> <!-- /timer tab -->
 			
+            <!-- Exam Screen 1 Tab -->
+            <!-- This screen has the layout where the exam information appears on the bottom of the screen
+                  instead of on the left side -->
 			<div id="exam-1">
 				<br />
-				
 				<!-- Date and Time  -->
 				<p style="text-align:center; ">
                     <span style="font-size:42px;" id="exam1-time"></span> </br />
@@ -96,19 +99,24 @@
                     <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam1" style=" width: 200px;"> Start </a>
                     <a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(1)" style=" width: 200px;" > Reset </a>
                 </div>
+			</div> <!-- /exam screen 1 tab -->
 			
-			</div>
-			
+            <!-- Exam Screen 2 Tab -->
+            <!-- This screen has the layout where the exam information appears on the left-hand side
+                  of the screen.  The clock and timer appear on the right-hand side.
+                  The information is stacked on top of each other. -->
 			<div id="exam-2">
 				<br />
-				
+                <!-- begin defining the layout -->
 				<div class="ui-grid-a">
+                    <!-- first block appears on the left -->
 					<div class="ui-block-a"><div class="ui-bar ui-bar-b" >
 						<div id="exam2-information" style="text-align:center">
 						
 						</div>
 					</div></div>
 					
+                    <!-- second block appears on the right -->
 					<div class="ui-block-b"><div class="ui-bar ui-bar-b" >
 						<!-- Date and Time  -->
 						<p style="text-align:center; ">
@@ -129,13 +137,14 @@
 
 					</div></div>
 				</div>
-			
-			</div>
+			</div> <!-- /exam screen 2 tab -->
 
             <!-- Settings Tab -->
             <div id="settings">
                 <form class="form-inline" id="countform1">
                 <h3> Timer Settings </h3>
+                
+                <!-- Takes int values for hours, minutes and seconds.  Default: 1 h 0 m 0 s. -->
                 <div class="ui-field-contain">
 					<label for="hours"> Hours: </label>
 					<input type="text" name="hours" id="hours" value="1"/>
@@ -144,6 +153,10 @@
                     <label for="seconds"> Seconds: </label>
 					<input type="text" name="seconds" id="seconds" value="0"/>
                 </div>
+                
+                <!-- The first row (exam name) shows as a larger font.  The subsequent lines are all the same.
+                     Any number of lines can be written afterwards.  
+                     For multiple subjects, seperate them with a ";" key on a newline -->
 				<div class="ui-field-contain">	
 					<label for="details"> Details: </label>
 					<textarea  type="text" name="details" id="details" rows="8"/>
@@ -152,21 +165,13 @@ Reading Time:  m
 Writing Time:  h   m
  </textarea>
 				</div>
-					
-					<button type="button" onclick="setTimer()"> Go </button>
+                    
+                    <!-- this button is for testing purposes only -->
+					<button type="button" onclick="setTimer()"> Test Settings </button>
 				</form>
-				
-                
-                <span id="demo"> </span>
-				
-				
-            </div>
-
-        </div> <!-- End Tabs -->
+            </div> <!-- /settings tab -->
+        </div> <!-- End All Tabs -->
     </div><!-- /content -->
-    
-<!-- ~*~  PLEASE INSERT ALL YOUR POPUP CODE BELOW THIS LINE  ~*~ -->
-
 </div><!-- /page -->
 
 	<script>
