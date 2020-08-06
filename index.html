@@ -416,6 +416,7 @@ Writing Time:  h   m
 					
 					output += "<p>";
                     
+                    // run through each line
                     var firstRow = true;
                     for (j=0; j < parts.length; j++){
                         if(parts[j] == ""){
@@ -433,15 +434,18 @@ Writing Time:  h   m
                     
                     output += "</p>"
 					
+                    // only create another grid if we are on exam page 1.
 					if(val == "1"){
 						output += "</div></div>";
 					}
                 }
                 
+                // only create another grid if we are on exam page 1.
 				if(val == "1"){
 					output += '</div>';
 				}
 				
+                // update the information elements.
 				for(var i = 0; i < informationElements.length; i++) {
 					document.getElementById(informationElements[i]).innerHTML = output;
                 }            
