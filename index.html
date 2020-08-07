@@ -306,7 +306,7 @@ Writing Time:  h   m
           //  update all the clocks (we have a few...)
 		  for(var i=0; i < clockTimeElements.length; i++){
 				document.getElementById(clockTimeElements[i]).innerHTML =
-				h + ":" + m + ":" + s;
+				h + ":" + m; //+ ":" + s;
 		  }
 		  
           // set a timeout so the clock updates every 1 second.
