@@ -39,8 +39,8 @@
         <div data-role="tabs" id="tabs">
             <div data-role="navbar">
               <ul>
-                <li><a href="#clock" data-ajax="false" onclick="onTabClick()">Clock</a></li>
-                <li><a href="#timer" data-ajax="false" onclick="onTabClick()">Timer</a></li>
+                <li><a href="#clock" data-ajax="false" onclick="onTabClick()">Clock Only</a></li>
+                <li><a href="#timer" data-ajax="false" onclick="onTabClick()">Timer Only</a></li>
 				<li><a href="#exam-1" data-ajax="false" onclick="onTabClick()">Exam 1</a></li>
 				<li><a href="#exam-2" data-ajax="false" onclick="onTabClick()">Exam 2</a></li>
 				<li><a href="#exam-hsc" data-ajax="false" onclick="onTabClick()">HSC Exam</a></li>
@@ -221,7 +221,7 @@ Writing Time:  h   m
         var timeRemaining;
         var pause = false;
 		var timerElements = ["timer-countdown", "exam1-countdown", "exam2-countdown", "examhsc-countdown"];
-		var buttonElements = ["pauseButtonTimer", "pauseButtonExam1", "pauseButtonExam2", "pauseButtonHSC"];
+		var buttonElements = ["pauseButtonTimer", "pauseButtonExam1", "pauseButtonExam2", "pauseButtonExamHSC"];
 		var clockTimeElements = ["clock-time", "exam1-time", "exam2-time", "examhsc-time"];
 		var clockDateElements = ["clock-date", "exam1-date", "exam2-date", "examhsc-date"];
 		var informationElements = ["exam1-information", "exam2-information", "examhsc-information"];
@@ -423,20 +423,33 @@ Writing Time:  h   m
                 // define variables
                 var clssBlock = "";
                 var clssDiv = "";
+                var fontSize = "72px";
+                var fontSizeBody = "53px";
                 
                 // each block (1st, 2nd, etc) has a different class.
                 //  we will select them here.
                 switch(arr.length){
                     case 1:
                         clssDiv = "ui-grid-a";
+                        fontSize = "72px";
+                        fontSizeBody = "53px";
                         break;
                     case 2:
                         clssDiv = "ui-grid-a";
+                        fontSize = "66px";
+                        fontSizeBody = "47px";
                         break;
                     case 3:
                         clssDiv = "ui-grid-b";
+                        fontSize = "60px";
+                        fontSizeBody = "41px";
                         break;
-                     default:
+                    case 4:
+                        clssDiv = "ui-grid-c";
+                        fontSize = "54px";
+                        fontSizeBody = "35px";
+                        break;
+                    default:
                         clssDiv = "";
                 }
                 
@@ -457,6 +470,9 @@ Writing Time:  h   m
                             break;
                         case 2:
                             clssBlock = "ui-block-c";
+                            break;
+                        case 3:
+                            clssBlock = "ui-block-d";
                             break;
                         default:
                             clssBlock = "ui-block-a";
@@ -480,10 +496,10 @@ Writing Time:  h   m
                             continue;
                         } else {
                             if (firstRow){
-                                output += '<span style="font-size:72px;">' + parts[j] + '</span> </br>';
+                                output += '<span style="font-size:' + fontSize + ';">' + parts[j] + '</span> </br>';
                                 firstRow = false;
                             } else {
-                                output += '<span style="font-size:53px">' + parts[j] + ' </span></br>';
+                                output += '<span style="font-size:' + fontSizeBody + ';">' + parts[j] + ' </span></br>';
                             }
                         }
                     }
