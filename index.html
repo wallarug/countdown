@@ -140,7 +140,7 @@
 				</div>
 			</div> <!-- /exam screen 2 tab -->
 			
-			<!-- Exam Screen 2 Tab -->
+			<!-- Exam Screen for HSC Tab -->
             <!-- This screen has the layout where the exam information appears on the left-hand side
                   of the screen.  The clock and timer appear on the right-hand side.
                   The information is stacked on top of each other. -->
@@ -150,7 +150,7 @@
 				<div class="ui-grid-a">
                     <!-- first block appears on the left -->
 					<div class="ui-block-a"><div class="ui-bar ui-bar-b" >
-						<div id="exam2-information" style="text-align:center">
+						<div id="examhsc-information" style="text-align:center">
 						
 						</div>
 					</div></div>
@@ -159,19 +159,22 @@
 					<div class="ui-block-b"><div class="ui-bar ui-bar-b" >
 						<!-- Date and Time  -->
 						<p style="text-align:center; ">
-							<span style="font-size:42px" id="exam2-date"></span> </br />
-                            <span style="font-size:60px;" id="exam2-time"></span> 
+							<span style="font-size:42px" id="examhsc-date"></span>
+						</p>
+                        
+                        <p style="text-align:center; ">
+                            <span style="font-size:100px;" id="examhsc-time"></span> 
 						</p>
 						
 						<!-- Countdown Timer  -->
-						<p style="text-align:center; font-size:72px;">
-							<span style="font-size:100px" id="exam2-countdown">Not configured.</span> </br />
+						<p style="text-align:center;">
+							<span style="font-size:42px" id="examhsc-countdown">Not configured.</span> </br />
 						</p>
 						
 						<!-- control buttons -->
 						<div style="text-align:center">
-							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExam2" style=" width: 200px;"> Start </a>
-							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(2)" style=" width: 200px;" value="2"> Reset </a>
+							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="pauseTimer()" id="pauseButtonExamHSC" style=" width: 200px;"> Start </a>
+							<a class="ui-shadow ui-btn ui-corner-all ui-btn-inline" type="button" onclick="setTimer(3)" style=" width: 200px;" value="2"> Reset </a>
 						</div>
 
 					</div></div>
@@ -217,11 +220,11 @@ Writing Time:  h   m
         // initialise variables that are global to all functions and the program
         var timeRemaining;
         var pause = false;
-		var timerElements = ["timer-countdown", "exam1-countdown", "exam2-countdown"];
-		var buttonElements = ["pauseButtonTimer", "pauseButtonExam1", "pauseButtonExam2"];
-		var clockTimeElements = ["clock-time", "exam1-time", "exam2-time"];
-		var clockDateElements = ["clock-date", "exam1-date", "exam2-date"];
-		var informationElements = ["exam1-information", "exam2-information"];
+		var timerElements = ["timer-countdown", "exam1-countdown", "exam2-countdown", "examhsc-countdown"];
+		var buttonElements = ["pauseButtonTimer", "pauseButtonExam1", "pauseButtonExam2", "pauseButtonHSC"];
+		var clockTimeElements = ["clock-time", "exam1-time", "exam2-time", "examhsc-time"];
+		var clockDateElements = ["clock-date", "exam1-date", "exam2-date", "examhsc-date"];
+		var informationElements = ["exam1-information", "exam2-information", "examhsc-information"];
         
         /*   
          *  Sets the timer to the values from settings.  Run by buttons.
