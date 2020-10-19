@@ -335,8 +335,9 @@ Finish 11.10
 		  var s = today.getSeconds();
 		  
           // add zeros to start if < 10.
+	  h = changeTime(h);
           m = checkTime(m);
-		  s = checkTime(s);
+          s = checkTime(s);
 		  
           //  update all the clocks (we have a few...)
 		  for(var i=0; i < clockTimeElements.length; i++){
@@ -370,6 +371,50 @@ Finish 11.10
 		  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
 		  return i;
 		}
+		
+		function changeTime(i) {
+			var value = 0;
+			
+			switch(i) {
+				case 13:
+					value = 1;
+					break;
+				case 14:
+					value = 2;
+					break;
+				case 15:
+					value = 3;
+					break;
+				case 16:
+					value = 4;
+					break;
+				case 17:
+					value = 5;
+					break;
+				case 18:
+					value = 6;
+					break;
+				case 19:
+					value = 7;
+					break;
+				case 20:
+					value = 8;
+					break;
+				case 21:
+					value = 9;
+					break;
+				case 22:
+					value = 10;
+					break;
+				case 23:
+					value = 11;
+					break;
+				default:
+					value = i;
+			}
+			return value;
+		}
+					
 		
         
         /*
